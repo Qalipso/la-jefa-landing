@@ -1,0 +1,83 @@
+/**
+ * Editable story content for the scroll scene.
+ * Texts are demo copy — replace freely; timings are scroll-progress fractions (0..1).
+ */
+export interface StoryStep {
+  id: string
+  /** Scroll progress at which the block starts appearing (0..1). */
+  start: number
+  /** Scroll progress at which the block is fully gone (0..1). */
+  end: number
+  eyebrow: string
+  title: string
+  text: string
+  align: 'left' | 'right'
+  variant?: 'message' | 'reviews' | 'final'
+  reviews?: Array<{ quote: string; author: string; meta: string }>
+  cta?: { label: string; href: string }
+}
+
+export const storySteps: StoryStep[] = [
+  {
+    id: 'intro',
+    start: 0.0,
+    end: 0.18,
+    eyebrow: 'LAVADERO DE ROPA · MONTEVIDEO',
+    title: 'La Jefa',
+    text: 'Tu ropa, fresca. Tu día, más liviano.',
+    align: 'left',
+    variant: 'message',
+  },
+  {
+    id: 'detail',
+    start: 0.19,
+    end: 0.36,
+    eyebrow: 'UN GIRO SUAVE',
+    title: 'Burbujas adentro. Aire fresco afuera.',
+    text: 'Nos ocupamos de tu ropa para que vos sigas con tu día.',
+    align: 'right',
+    variant: 'message',
+  },
+  {
+    id: 'proof',
+    start: 0.37,
+    end: 0.52,
+    eyebrow: 'SIN VUELTAS',
+    title: 'Lavamos. Secamos. Vos respirás.',
+    text: 'Una pausa para tu ropa, un poco más de tiempo para vos.',
+    align: 'left',
+    variant: 'message',
+  },
+  {
+    id: 'reviews',
+    start: 0.51,
+    end: 0.82,
+    eyebrow: '',
+    title: '',
+    text: '',
+    align: 'left',
+    variant: 'reviews',
+    reviews: [
+      {
+        quote: '4,2 ★',
+        author: 'Valoración en Google',
+        meta: 'Lavandería de barrio en Montevideo',
+      },
+      {
+        quote: 'Salto 1249',
+        author: 'Estamos cerca',
+        meta: '11200 Montevideo · abre a las 9:00',
+      },
+    ],
+  },
+  {
+    id: 'final',
+    start: 0.84,
+    end: 1,
+    eyebrow: 'LA JEFA',
+    title: 'Gracias.',
+    text: 'Tu ropa queda en buenas manos.',
+    align: 'right',
+    variant: 'final',
+  },
+]
