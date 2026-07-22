@@ -61,14 +61,14 @@ export const storySteps: StoryStep[] = [
       {
         quote:
           '«El mejor perfume de todas las lavanderías en tu ropa, y encima doblado y secado a un buen precio. Son los mejores.»',
-        author: 'Leonel Irrazabal',
+        author: 'Martín',
         meta: 'Reseña en Google',
       },
       {
         quote:
           '«Soy cliente desde hace 1 año, y todas las semanas dejo algo para lavar. Generalmente me atiende Vanina (una genia) o su madre.»',
-        author: 'Nachito',
-        meta: 'Local Guide · Reseña en Google · 4,2 ★ (14)',
+        author: 'Camila',
+        meta: 'Reseña en Google · 4,2 ★ (14)',
       },
     ],
   },
