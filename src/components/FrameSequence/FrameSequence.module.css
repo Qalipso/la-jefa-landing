@@ -108,9 +108,9 @@
 
 /* Z-pattern placement (desktop): intro TL → detail TR/CR → proof BL → final BR */
 .step[data-step='intro'] {
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-top: calc(72px + 6vh);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .step[data-step='detail'] {
@@ -125,10 +125,9 @@
 }
 
 .step[data-step='final'] {
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: calc(72px + 7vh);
 }
 
 .step[data-step='intro'] .stepInner,
@@ -176,10 +175,13 @@
 
 .review p {
   margin: 0 0 1.25rem;
-  font-size: clamp(32px, 4vw, 58px);
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.4;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(30px, 3.6vw, 54px);
+  font-weight: 480;
+  font-variation-settings: 'opsz' 60;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
 .review footer {
@@ -219,8 +221,10 @@
 .titleH2 {
   margin: 0 0 0.45em;
   color: var(--color-text);
-  font-weight: 500;
-  letter-spacing: -0.035em;
+  font-family: var(--font-display);
+  font-weight: 550;
+  font-variation-settings: 'opsz' 144;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
@@ -308,15 +312,10 @@
     padding-bottom: max(14vh, calc(env(safe-area-inset-bottom) + 96px)) !important;
   }
 
-  .step[data-step='intro'] {
-    align-items: flex-start !important;
-    padding-top: calc(64px + 4vh);
-  }
-
+  .step[data-step='intro'],
   .step[data-step='final'] {
-    align-items: flex-start !important;
+    align-items: center !important;
     justify-content: center !important;
-    padding-top: calc(64px + 7vh) !important;
     padding-bottom: 0 !important;
   }
 

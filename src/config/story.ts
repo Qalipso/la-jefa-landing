@@ -59,14 +59,16 @@ export const storySteps: StoryStep[] = [
     variant: 'reviews',
     reviews: [
       {
-        quote: '4,2 ★',
-        author: 'Valoración en Google',
-        meta: 'Lavandería de barrio en Montevideo',
+        quote:
+          '«El mejor perfume de todas las lavanderías en tu ropa, y encima doblado y secado a un buen precio. Son los mejores.»',
+        author: 'Leonel Irrazabal',
+        meta: 'Reseña en Google',
       },
       {
-        quote: 'Salto 1249',
-        author: 'Estamos cerca',
-        meta: '11200 Montevideo · abre a las 9:00',
+        quote:
+          '«Soy cliente desde hace 1 año, y todas las semanas dejo algo para lavar. Generalmente me atiende Vanina (una genia) o su madre.»',
+        author: 'Nachito',
+        meta: 'Local Guide · Reseña en Google · 4,2 ★ (14)',
       },
     ],
   },
