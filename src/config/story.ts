@@ -12,6 +12,8 @@ export interface StoryStep {
   title: string
   text: string
   align: 'left' | 'right'
+  /** Adds a gentle proximity scroll-snap anchor at this step's sweet spot. */
+  snap?: boolean
   variant?: 'message' | 'reviews' | 'final'
   reviews?: Array<{ quote: string; author: string; meta: string }>
   cta?: { label: string; href: string }
@@ -30,6 +32,7 @@ export const storySteps: StoryStep[] = [
   },
   {
     id: 'detail',
+    snap: true,
     start: 0.19,
     end: 0.36,
     eyebrow: 'UN GIRO SUAVE',
@@ -40,6 +43,7 @@ export const storySteps: StoryStep[] = [
   },
   {
     id: 'proof',
+    snap: true,
     start: 0.37,
     end: 0.52,
     eyebrow: 'SIN VUELTAS',
@@ -50,6 +54,7 @@ export const storySteps: StoryStep[] = [
   },
   {
     id: 'reviews',
+    snap: true,
     start: 0.51,
     end: 0.82,
     eyebrow: '',
@@ -74,6 +79,7 @@ export const storySteps: StoryStep[] = [
   },
   {
     id: 'final',
+    snap: true,
     start: 0.84,
     end: 1,
     eyebrow: 'LA JEFA',

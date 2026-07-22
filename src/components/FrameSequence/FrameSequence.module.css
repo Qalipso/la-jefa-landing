@@ -3,6 +3,16 @@
   background: var(--color-dark);
 }
 
+.snapAnchor {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 100vh;
+  height: 100svh;
+  scroll-snap-align: start;
+  pointer-events: none;
+}
+
 .sticky {
   position: sticky;
   top: 0;

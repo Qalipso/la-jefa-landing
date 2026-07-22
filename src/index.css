@@ -20,6 +20,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Magnetic-but-polite: only snaps when the user stops near an anchor. */
+  scroll-snap-type: y proximity;
 }
 
 @media (prefers-reduced-motion: reduce) {

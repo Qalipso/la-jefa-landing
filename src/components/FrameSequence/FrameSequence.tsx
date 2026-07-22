@@ -188,6 +188,24 @@ export function FrameSequence() {
       style={{ height: `${sequenceConfig.scrollHeightVh}vh` }}
       aria-label="Historia scroll: del tambor del lavarropas a la ciudad al atardecer"
     >
+      {/* Gentle proximity snap anchors at each key step's sweet spot.
+          `y proximity` on <html> only nudges when the user already stopped
+          nearby — it never fights active scrolling. */}
+      {storySteps
+        .filter((s) => s.snap)
+        .map((s) => {
+          const anchor = s.start + 0.42 * (s.end - s.start)
+          return (
+            <div
+              key={`snap-${s.id}`}
+              className={styles.snapAnchor}
+              style={{
+                top: `calc((${sequenceConfig.scrollHeightVh}vh - 100svh) * ${anchor.toFixed(4)})`,
+              }}
+              aria-hidden="true"
+            />
+          )
+        })}
       <div className={styles.sticky}>
         {/* Intro loop: MP4 (~0.7 MB) instead of the source GIF (~18 MB) */}
         <video
