@@ -30,7 +30,7 @@ export function FrameSequence() {
   const reducedMotion = usePrefersReducedMotion()
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const introGifRef = useRef<HTMLImageElement>(null)
+  const introGifRef = useRef<HTMLVideoElement>(null)
   const stepRefs = useRef(new Map<string, HTMLDivElement>())
 
   const [loadPct, setLoadPct] = useState(0)
@@ -189,11 +189,15 @@ export function FrameSequence() {
       aria-label="Historia scroll: del tambor del lavarropas a la ciudad al atardecer"
     >
       <div className={styles.sticky}>
-        <img
+        {/* Intro loop: MP4 (~0.7 MB) instead of the source GIF (~18 MB) */}
+        <video
           ref={introGifRef}
           className={styles.introAnimation}
-          src={`${import.meta.env.BASE_URL}la-jefa-intro.gif`}
-          alt=""
+          src={`${import.meta.env.BASE_URL}la-jefa-intro.mp4`}
+          autoPlay
+          muted
+          loop
+          playsInline
           aria-hidden="true"
         />
         <canvas
