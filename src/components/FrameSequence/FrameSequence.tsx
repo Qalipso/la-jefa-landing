@@ -5,7 +5,6 @@ import { FrameLoader } from '../../lib/frameLoader'
 import { drawCover } from '../../lib/drawCover'
 import { LoadingIndicator } from './LoadingIndicator'
 import { StoryOverlays } from './StoryOverlays'
-import { StaticStory } from './StaticStory'
 import styles from './FrameSequence.module.css'
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v))
@@ -31,14 +30,23 @@ export function FrameSequence() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const introGifRef = useRef<HTMLVideoElement>(null)
+  const scrollHintRef = useRef<HTMLDivElement>(null)
   const stepRefs = useRef(new Map<string, HTMLDivElement>())
 
   const [loadPct, setLoadPct] = useState(0)
   const [loadDone, setLoadDone] = useState(false)
   const [firstFrameReady, setFirstFrameReady] = useState(false)
 
+  // Reduced motion only pauses the autonomous intro loop — the scroll-driven
+  // sequence stays: it moves exactly as much as the user scrolls, no more.
   useEffect(() => {
-    if (reducedMotion) return
+    const v = introGifRef.current
+    if (!v) return
+    if (reducedMotion) v.pause()
+    else void v.play().catch(() => {})
+  }, [reducedMotion])
+
+  useEffect(() => {
     const section = sectionRef.current
     const canvas = canvasRef.current
     const introGif = introGifRef.current
@@ -123,6 +131,12 @@ export function FrameSequence() {
         introGif.style.opacity = gifOpacity.toFixed(3)
         introGif.style.visibility = gifOpacity <= 0 ? 'hidden' : 'visible'
       }
+      const hint = scrollHintRef.current
+      if (hint) {
+        const hintOpacity = clamp01(1 - p / 0.05)
+        hint.style.opacity = hintOpacity.toFixed(3)
+        hint.style.visibility = hintOpacity <= 0 ? 'hidden' : 'visible'
+      }
       const wanted = Math.round(p * (cfg.frameCount - 1))
       const src = loader.nearestLoaded(wanted)
       if (src >= 0 && src !== drawnIndex) {
@@ -175,11 +189,7 @@ export function FrameSequence() {
       ro.disconnect()
       loader.abort()
     }
-  }, [reducedMotion])
-
-  if (reducedMotion) {
-    return <StaticStory />
-  }
+  }, [])
 
   return (
     <section
@@ -212,10 +222,10 @@ export function FrameSequence() {
           ref={introGifRef}
           className={styles.introAnimation}
           src={`${import.meta.env.BASE_URL}la-jefa-intro.mp4`}
-          autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           aria-hidden="true"
         />
         <canvas
@@ -225,6 +235,10 @@ export function FrameSequence() {
           aria-label={CANVAS_LABEL}
         />
         <LoadingIndicator percent={loadPct} done={loadDone} />
+        <div ref={scrollHintRef} className={styles.scrollHint} aria-hidden="true">
+          <span className={styles.scrollHintArrow}>↓</span>
+          <span>deslizá</span>
+        </div>
         <StoryOverlays
           registerRef={(id, el) => {
             if (el) stepRefs.current.set(id, el)

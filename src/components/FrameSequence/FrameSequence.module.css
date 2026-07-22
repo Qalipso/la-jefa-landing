@@ -89,6 +89,46 @@
   transition: transform 0.25s ease;
 }
 
+/* ---------- scroll hint ---------- */
+
+.scrollHint {
+  position: absolute;
+  inset-inline: 0;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-muted);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  pointer-events: none;
+  text-shadow: 0 1px 10px rgba(16, 39, 53, 0.6);
+}
+
+.scrollHintArrow {
+  font-size: 18px;
+  animation: hint-bob 2.2s ease-in-out infinite;
+}
+
+@keyframes hint-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollHintArrow {
+    animation: none;
+  }
+}
+
 /* ---------- story overlays ---------- */
 
 .overlays {
@@ -276,33 +316,6 @@
 .cta:focus-visible {
   outline: 3px solid var(--color-text);
   outline-offset: 3px;
-}
-
-/* ---------- reduced-motion static story ---------- */
-
-.staticPoster {
-  position: relative;
-  height: 80svh;
-  overflow: hidden;
-}
-
-.staticPoster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.staticFlow {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(48px, 10vh, 120px);
-  padding: clamp(48px, 10vh, 120px) var(--page-padding);
-  background: var(--color-dark);
-}
-
-.staticStep {
-  max-width: var(--content-width);
 }
 
 /* ---------- tablet ---------- */
